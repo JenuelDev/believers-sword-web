@@ -8,7 +8,6 @@ onBeforeMount(async () => {});
 </script>
 <template>
     <NMessageProvider>
-        <Head title="Admin Page" />
         <NLayout has-sider class="h-[100vh]">
             <NLayoutSider collapse-mode="width" :collapsed-width="64" :width="240" show-trigger="bar" bordered @collapse="collapsed = true" @expand="collapsed = false">
                 <AdminMenus :collapsed="collapsed" />
