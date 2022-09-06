@@ -8,12 +8,13 @@ import axios from "axios";
 import languageOptions from "./languageOptions.js";
 import TiptapEditor from "./../Tiptap/Editor.vue";
 
+const supabase = useSupabaseClient();
 const showModal = ref(false);
 const selectedSermon = ref(null);
 const formRef = ref(null);
 const formValue = ref({
     title: null,
-    type: null,
+    type: "youtube",
     description: null,
     youtubeVideoId: null,
     scripture: null,
@@ -80,13 +81,14 @@ const submitSermon = () => {
 
                 if (!youtubeDetails) {
                     alert("Failed To Get Youtube Details!");
+                    submitLoading.value = true;
                     return;
                 }
 
                 let data = {
                     type: "youtube",
                     thumbnail: youtubeDetails.snippet.thumbnails.medium.url,
-                    date_time: new Date(),
+                    // date_time: new Date(),
                     description: youtubeDetails.snippet.description,
                     title: youtubeDetails.snippet.title,
                     youtube_embed: `https://www.youtube.com/embed/${youtubeDetails.id}`,
@@ -100,22 +102,20 @@ const submitSermon = () => {
                 try {
                     // save sermon
                     submitLoading.value = true;
-                    axios
-                        .post("/api/sermon/upsert", data, {
-                            headers: {
-                                authorization: `Bearer ${localStorage.getItem("token")}`,
-                            },
-                        })
-                        .then((response) => {
-                            submitLoading.value = false;
-                            emit("saved", response.data);
-                            toggleModal();
-                            resetForm();
-                        })
-                        .catch((e) => {
-                            console.log(e);
-                            submitLoading.value = false;
-                        });
+                    console.log(data);
+
+                    // create record
+                    const newSermon = await supabase.from("sermons").insert([data]);
+
+                    if (newSermon.error) {
+                        alert(newSermon.error.message);
+                        submitLoading.value = false;
+                        return false;
+                    }
+
+                    console.log(newSermon.data);
+
+                    submitLoading.value = false;
                 } catch (e) {
                     console.log(e);
                 }
@@ -173,7 +173,7 @@ const submitSermon = () => {
 
 const resetForm = () => {
     formValue.value.title = null;
-    formValue.value.type = null;
+    formValue.value.type = "youtube";
     formValue.value.description = null;
     formValue.value.youtubeVideoId = null;
     formValue.value.scripture = null;

@@ -1,3 +1,8 @@
+<script setup>
+useHead({
+    title: "Admin - Settings",
+});
+</script>
 <template>
     <div>
         <ClientOnly>

@@ -3,11 +3,13 @@ import { h, ref } from "vue";
 import { NMenu, NIcon } from "naive-ui";
 
 const router = useRouter();
+const route = useRoute();
 const props = defineProps({
     collapsed: Boolean,
 });
-
-const selectedMenu = ref("admin.home");
+const { $session } = useNuxtApp();
+const supabase = useSupabaseClient();
+const selectedMenu = ref("/admin/home");
 const menuOptions = [
     {
         label: "Dashboard",
@@ -31,15 +33,29 @@ function expandIcon() {
     return h(NIcon, null, { default: () => h(CaretRight16Filled) });
 }
 
-function selectMenu(data) {
+async function selectMenu(data) {
     if (data == "logout") {
         // localStorage.removeItem("token");
         console.log("clicked logout");
+        const { error } = await supabase.auth.signOut();
+        if (error) {
+            alert(error.message);
+            return;
+        }
+
+        $session.remove("session");
+        router.push({ path: "/" });
     } else {
         selectedMenu.value = data;
         router.push({ path: data });
     }
 }
+
+onBeforeMount(() => {
+    const routePath = route.path;
+    console.log(routePath);
+    selectedMenu.value = routePath;
+});
 </script>
 
 <template>

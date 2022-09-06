@@ -1,6 +1,10 @@
 <script setup>
 import { onMounted } from "vue";
 
+useHead({
+    title: "Admin Home",
+});
+
 onMounted(() => {
     console.log("This is home page");
 });

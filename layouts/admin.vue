@@ -3,8 +3,16 @@ import { ref, onBeforeMount } from "vue";
 import { NLayout, NLayoutSider, NLayoutContent, NMessageProvider } from "naive-ui";
 
 const collapsed = ref(false);
+const supabase = useSupabaseClient();
+const router = useRouter();
+const { $session } = useNuxtApp();
 
-onBeforeMount(async () => {});
+onBeforeMount(async () => {
+    const session = $session.get("session");
+    if (!session) {
+        router.push({ path: "/" });
+    }
+});
 </script>
 <template>
     <div>

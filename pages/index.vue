@@ -2,6 +2,8 @@
 import { NInput, NButton } from "naive-ui";
 import { onBeforeMount, reactive, ref } from "vue";
 
+const supabase = useSupabaseClient();
+const { $session } = useNuxtApp();
 const router = useRouter();
 const form = reactive({
     email: "",
@@ -10,11 +12,27 @@ const form = reactive({
 });
 
 onBeforeMount(async () => {
-    console.log("before mount");
+    const session = $session.get("session");
+    if (session) {
+        router.push({ path: "/admin/home" });
+    }
 });
 
-const submit = () => {
-    console.log("submit");
+const submit = async () => {
+    form.isLoading = true;
+    const { user, session, error } = await supabase.auth.signIn({
+        email: form.email,
+        password: form.password,
+    });
+
+    if (error) {
+        alert(error.message);
+        form.isLoading = false;
+        return;
+    }
+
+    $session.set("session", session);
+    form.isLoading = false;
     router.push("/admin/home");
 };
 </script>

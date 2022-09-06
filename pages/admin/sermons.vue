@@ -5,6 +5,10 @@ import { NDataTable, NButton, NPagination } from "naive-ui";
 const sermons = ref([]);
 const editSermonModal = ref(null);
 
+useHead({
+    title: "Admin - Sermons",
+});
+
 const columns = [
     {
         title: "UID",
