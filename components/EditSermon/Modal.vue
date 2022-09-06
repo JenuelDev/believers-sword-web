@@ -3,10 +3,10 @@ import { NModal, NCard, NButton, NInput, NForm, NFormItem, useMessage, NSelect, 
 import { ref } from "vue";
 import EditSermonModal from "./FormRules";
 import { getYoutubeVideoDetails } from "./YoutubeApi";
-import TipTapEditor from "./../../../../components/TiptapEditor/TipTapEditor.vue";
 import denomination from "./denomination.js";
-import axios from "./../../../../Service/axios.js";
+import axios from "axios";
 import languageOptions from "./languageOptions.js";
+import TiptapEditor from "./../Tiptap/Editor.vue";
 
 const showModal = ref(false);
 const selectedSermon = ref(null);
@@ -238,7 +238,7 @@ defineExpose({
                     <NInput v-model:value="formValue.source" :disabled="submitLoading" type="text" placeholder="Enter Source" />
                 </NFormItem>
                 <div v-if="formValue.type === 'text'">
-                    <TipTapEditor v-model="tiptapContent" />
+                    <TiptapEditor v-model="tiptapContent" />
                 </div>
             </NForm>
             <template #footer>

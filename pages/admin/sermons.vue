@@ -99,12 +99,16 @@ onMounted(async () => {
 });
 </script>
 <template>
-    <NuxtLayout name="admin">
-        <NButton class="mb-20px" @click="editSermonModal.toggleModal()">+ Create New Sermon</NButton>
-        <EditSermonModal ref="editSermonModal" @saved="addSermonToData" />
-        <NDataTable :columns="columns" :data="sermons" :pagination="false" :bordered="false" :loading="loading" />
-        <div class="flex justify-end">
-            <NPagination class="mt-10px" v-model:page="page" :page-count="pageCount" :disabled="loading" />
-        </div>
-    </NuxtLayout>
+    <div>
+        <ClientOnly>
+            <NuxtLayout name="admin">
+                <NButton class="mb-20px" @click="editSermonModal.toggleModal()">+ Create New Sermon</NButton>
+                <EditSermonModal ref="editSermonModal" @saved="addSermonToData" />
+                <NDataTable :columns="columns" :data="sermons" :pagination="false" :bordered="false" :loading="loading" />
+                <div class="flex justify-end">
+                    <NPagination class="mt-10px" v-model:page="page" :page-count="pageCount" :disabled="loading" />
+                </div>
+            </NuxtLayout>
+        </ClientOnly>
+    </div>
 </template>

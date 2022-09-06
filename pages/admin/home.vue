@@ -6,7 +6,11 @@ onMounted(() => {
 });
 </script>
 <template>
-    <NuxtLayout name="admin">
-        <div>This is home page.</div>
-    </NuxtLayout>
+    <div>
+        <ClientOnly>
+            <NuxtLayout name="admin">
+                <div>This is home page.</div>
+            </NuxtLayout>
+        </ClientOnly>
+    </div>
 </template>

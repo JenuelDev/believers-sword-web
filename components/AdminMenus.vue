@@ -2,6 +2,7 @@
 import { h, ref } from "vue";
 import { NMenu, NIcon } from "naive-ui";
 
+const router = useRouter();
 const props = defineProps({
     collapsed: Boolean,
 });
@@ -14,11 +15,11 @@ const menuOptions = [
     },
     {
         label: "Sermons",
-        key: "admin.sermon",
+        key: "/admin/sermons",
     },
     {
         label: "Settings",
-        key: "admin.settings",
+        key: "/admin/settings",
     },
     {
         label: "Log Out",
@@ -32,9 +33,11 @@ function expandIcon() {
 
 function selectMenu(data) {
     if (data == "logout") {
-        localStorage.removeItem("token");
+        // localStorage.removeItem("token");
+        console.log("clicked logout");
     } else {
         selectedMenu.value = data;
+        router.push({ path: data });
     }
 }
 </script>
