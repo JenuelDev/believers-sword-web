@@ -6,7 +6,7 @@ const sermons = ref([]);
 const editSermonModal = ref(null);
 const supabase = useSupabaseClient();
 const pageCount = ref(0);
-const limit = ref(3);
+const limit = ref(20);
 const loading = ref(false);
 const page = ref(1);
 
@@ -103,7 +103,6 @@ const getSermonData = async (search = "") => {
         .order("id", { ascending: false })
         .range(setPage.from, setPage.to);
 
-    console.log(data);
     if (error) {
         alert(error.message);
         loading.value = false;

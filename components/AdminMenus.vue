@@ -35,8 +35,6 @@ function expandIcon() {
 
 async function selectMenu(data) {
     if (data == "logout") {
-        // localStorage.removeItem("token");
-        console.log("clicked logout");
         const { error } = await supabase.auth.signOut();
         if (error) {
             alert(error.message);
@@ -53,7 +51,6 @@ async function selectMenu(data) {
 
 onBeforeMount(() => {
     const routePath = route.path;
-    console.log(routePath);
     selectedMenu.value = routePath;
 });
 </script>
