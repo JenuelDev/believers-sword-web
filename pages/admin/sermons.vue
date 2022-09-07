@@ -4,6 +4,7 @@ import { NDataTable, NButton, NPagination } from "naive-ui";
 
 const sermons = ref([]);
 const editSermonModal = ref(null);
+const supabase = useSupabaseClient();
 
 useHead({
     title: "Admin - Sermons",
@@ -12,7 +13,7 @@ useHead({
 const columns = [
     {
         title: "UID",
-        key: "_id",
+        key: "id",
         width: 150,
     },
     {
@@ -84,9 +85,12 @@ const pageCount = ref(0);
 const limit = ref(50);
 const loading = ref(false);
 
-const getSermonData = (search = "") => {
+const getSermonData = async (search = "") => {
     loading.value = true;
     console.log("get sermon data");
+    const { data, error } = await supabase.from("sermons").select().order("id", { ascending: false });
+    console.log(data);
+    sermons.value = data;
     loading.value = false;
 };
 
