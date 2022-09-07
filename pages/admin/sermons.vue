@@ -5,6 +5,10 @@ import { NDataTable, NButton, NPagination } from "naive-ui";
 const sermons = ref([]);
 const editSermonModal = ref(null);
 const supabase = useSupabaseClient();
+const pageCount = ref(0);
+const limit = ref(3);
+const loading = ref(false);
+const page = ref(1);
 
 useHead({
     title: "Admin - Sermons",
@@ -53,6 +57,7 @@ const columns = [
                         strong: true,
                         tertiary: true,
                         size: "small",
+                        disabled: loading.value,
                         onClick: () => editSermonModal.value.toggleModal(row),
                     },
                     { default: () => "Edit" }
@@ -63,9 +68,10 @@ const columns = [
                         strong: true,
                         tertiary: true,
                         size: "small",
+                        disabled: loading.value,
                         onClick: async () => {
                             if (confirm("Are you sure you want to delete this? ") == true) {
-                                await deleteSermon(row._id);
+                                await deleteSermon(row.id);
                                 await getSermonData();
                             }
                         },
@@ -77,19 +83,32 @@ const columns = [
     },
 ];
 
-const page = ref(1);
 watch(page, (page) => {
     getSermonData();
 });
-const pageCount = ref(0);
-const limit = ref(50);
-const loading = ref(false);
+
+const getPagination = (page = 1, size = 30) => {
+    const from = (page - 1) * (size - 1);
+    const to = from + (size - 1);
+
+    return { from, to };
+};
 
 const getSermonData = async (search = "") => {
     loading.value = true;
-    console.log("get sermon data");
-    const { data, error } = await supabase.from("sermons").select().order("id", { ascending: false });
+    const setPage = getPagination(page.value, limit.value);
+    const { data, error } = await supabase
+        .from("sermons")
+        .select()
+        .order("id", { ascending: false })
+        .range(setPage.from, setPage.to);
+
     console.log(data);
+    if (error) {
+        alert(error.message);
+        loading.value = false;
+    }
+
     sermons.value = data;
     loading.value = false;
 };
@@ -98,8 +117,11 @@ const addSermonToData = (data) => {
     getSermonData();
 };
 
-const deleteSermon = (id) => {
-    console.log("delete sermon");
+const deleteSermon = async (id) => {
+    const { data, error } = await supabase.from("sermons").delete().match({ id });
+    if (error) {
+        alert(error.message);
+    }
 };
 
 onMounted(async () => {
@@ -112,9 +134,17 @@ onMounted(async () => {
             <NuxtLayout name="admin">
                 <NButton class="mb-20px" @click="editSermonModal.toggleModal()">+ Create New Sermon</NButton>
                 <EditSermonModal ref="editSermonModal" @saved="addSermonToData" />
-                <NDataTable :columns="columns" :data="sermons" :pagination="false" :bordered="false" :loading="loading" />
-                <div class="flex justify-end">
-                    <NPagination class="mt-10px" v-model:page="page" :page-count="pageCount" :disabled="loading" />
+                <NDataTable
+                    :columns="columns"
+                    :data="sermons"
+                    :pagination="false"
+                    :bordered="false"
+                    :loading="loading"
+                />
+                <div class="flex justify-end gap-2 items-center mt-2">
+                    <NButton @click="page = page - 1" :disabled="page == 1">Previous Page</NButton>
+                    <span>{{ page }}</span>
+                    <NButton @click="page += 1" :disabled="sermons.length < limit">Next Page</NButton>
                 </div>
             </NuxtLayout>
         </ClientOnly>

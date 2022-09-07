@@ -108,7 +108,7 @@ const submitSermon = () => {
                     source: formValue.value.source,
                 };
 
-                if (isForUpdate.value) data.id = selectedSermon.value.id;
+                // if (isForUpdate.value) data.id = selectedSermon.value.id;
 
                 try {
                     // save sermon
@@ -116,9 +116,9 @@ const submitSermon = () => {
                     console.log(data);
 
                     // create record
-                    const newSermon = isForUpdate.value
+                    const newSermon = !isForUpdate.value
                         ? await supabase.from("sermons").insert([data])
-                        : await supabase.from("sermons").upsert(data);
+                        : await supabase.from("sermons").update(data).match({ id: selectedSermon.value.id });
 
                     if (newSermon.error) {
                         alert(newSermon.error.message);
@@ -148,9 +148,9 @@ const submitSermon = () => {
                     source: formValue.value.source,
                 };
 
-                if (isForUpdate.value) {
-                    data.id = selectedSermon.value.id;
-                }
+                // if (isForUpdate.value) {
+                //     data.id = selectedSermon.value.id;
+                // }
 
                 console.log(data);
 
@@ -160,9 +160,9 @@ const submitSermon = () => {
                     console.log(data);
 
                     // create record
-                    const newSermon = isForUpdate.value
+                    const newSermon = !isForUpdate.value
                         ? await supabase.from("sermons").insert([data])
-                        : await supabase.from("sermons").upsert(data);
+                        : await supabase.from("sermons").update(data).match({ id: selectedSermon.value.id });
 
                     if (newSermon.error) {
                         alert(newSermon.error.message);
