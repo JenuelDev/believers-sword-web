@@ -1,13 +1,8 @@
 <script setup>
 import { NModal, NCard, NButton, NInput, NForm, NFormItem, useMessage, NSelect, NDatePicker } from "naive-ui";
-import { ref } from "vue";
-import EditSermonModal from "./FormRules";
-import { getYoutubeVideoDetails } from "./YoutubeApi";
-import denomination from "./denomination.js";
-import axios from "axios";
-import languageOptions from "./languageOptions.js";
 import TiptapEditor from "./../Tiptap/Editor.vue";
 
+const { $getYoutubeVideoDetails, $sermonLanguageOptions, $denominations, $sermonFormRules } = useNuxtApp();
 const supabase = useSupabaseClient();
 const showModal = ref(false);
 const selectedSermon = ref(null);
@@ -81,7 +76,7 @@ const submitSermon = () => {
             message.success("Valid");
 
             if (formValue.value.type === "youtube") {
-                const youtubeDetails = await getYoutubeVideoDetails(formValue.value.youtubeVideoId)
+                const youtubeDetails = await $getYoutubeVideoDetails(formValue.value.youtubeVideoId)
                     .then(({ data }) => {
                         if (data.items.length > 0) return data.items[0];
                         return false;
@@ -198,7 +193,7 @@ defineExpose({
     <NModal v-model:show="showModal">
         <NCard style="width: 1000px" title="Sermon" :bordered="false" size="huge" role="dialog" aria-modal="true">
             <template #header-extra>{{ selectedSermon ? "Update" : "Create New" }} Sermon</template>
-            <NForm ref="formRef" :label-width="80" :model="formValue" :rules="EditSermonModal" :size="'medium'">
+            <NForm ref="formRef" :label-width="80" :model="formValue" :rules="$sermonFormRules" :size="'medium'">
                 <NFormItem label="Select Type" path="type">
                     <NSelect
                         v-model:value="formValue.type"
@@ -257,7 +252,7 @@ defineExpose({
                     <!-- <NInput v-model:value="formValue.denomination" :disabled="submitLoading" type="text" placeholder="Enter Title" /> -->
                     <NSelect
                         v-model:value="formValue.denomination"
-                        :options="denomination"
+                        :options="$denominations"
                         placeholder="Please Select Type"
                         :disabled="submitLoading"
                     />
@@ -283,7 +278,7 @@ defineExpose({
                 <NFormItem label="Language" path="language">
                     <NSelect
                         v-model:value="formValue.language"
-                        :options="languageOptions"
+                        :options="$sermonLanguageOptions"
                         placeholder="Please Select Type"
                         :disabled="submitLoading"
                     />

@@ -1,5 +1,5 @@
 const denomination = [
-    { label: 'Adventist' },
+    { label: "Adventist" },
     { label: "Anglican" },
     { label: "Apostolic" },
     { label: "Assembly of God" },
@@ -36,15 +36,14 @@ const denomination = [
     { label: "United Methodist" },
     { label: "Vineyard" },
     { label: "Wesleyan" },
-    { label: "Others" }
-]
+    { label: "Others" },
+];
 
-
-const setDenomination = denomination.map(den => {
-    return {
-        label: den.label,
-        value: den.label
-    }
-})
-
-export default setDenomination;
+export const getDenominations = () => {
+    return denomination.map((den) => {
+        return {
+            label: den.label,
+            value: den.label,
+        };
+    });
+};

@@ -1,6 +1,5 @@
 <script setup>
-import { onMounted, ref, h, watch } from "vue";
-import { NDataTable, NButton, NPagination } from "naive-ui";
+import { NDataTable, NButton } from "naive-ui";
 
 const sermons = ref([]);
 const editSermonModal = ref(null);

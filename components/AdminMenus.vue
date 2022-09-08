@@ -1,5 +1,4 @@
 <script setup>
-import { h, ref } from "vue";
 import { NMenu, NIcon } from "naive-ui";
 
 const router = useRouter();

@@ -1,6 +1,4 @@
 <script setup>
-import { onMounted } from "vue";
-
 useHead({
     title: "Admin Home",
 });
