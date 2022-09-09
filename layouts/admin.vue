@@ -8,7 +8,7 @@ const { $session } = useNuxtApp();
 onBeforeMount(async () => {
     const session = $session.get("session");
     if (!session) {
-        router.push({ path: "/" });
+        router.push({ path: "/login" });
     }
 });
 </script>

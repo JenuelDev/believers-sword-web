@@ -291,7 +291,7 @@
   resolved "https://registry.yarnpkg.com/@css-render/plugin-bem/-/plugin-bem-0.15.11.tgz#250b853704af1fbb935b8fcd987839dcc9c95ce2"
   integrity sha512-Bn8qadYPIz5DhZ4obTGHOJzeziQH6kY0+Fk5AEvwuuy378SLwwvXuuoechLjBHcgKkPCM03Oo4dDSGP/6NMdyw==
 
-"@css-render/vue3-ssr@^0.15.10":
+"@css-render/vue3-ssr@^0.15.10", "@css-render/vue3-ssr@^0.15.11":
   version "0.15.11"
   resolved "https://registry.yarnpkg.com/@css-render/vue3-ssr/-/vue3-ssr-0.15.11.tgz#d6646f69c7bd4b54485a40441ac60102822cd492"
   integrity sha512-n+SuqLPbY30FUTM8slX75OaEG+c8XlTOFrAklekX2XQGvBbz9XdBE6hTEgGlV5kPcTMqTJeCG7Vzhs9/29VC7w==

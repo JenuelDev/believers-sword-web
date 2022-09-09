@@ -1,5 +1,4 @@
 {
     // https://v3.nuxtjs.org/concepts/typescript
-    "extends": "./.nuxt/tsconfig.json",
-    "target": "es2017"
+    "extends": "./.nuxt/tsconfig.json"
 }

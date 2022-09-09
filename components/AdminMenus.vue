@@ -41,7 +41,7 @@ async function selectMenu(data) {
         }
 
         $session.remove("session");
-        router.push({ path: "/" });
+        router.push({ path: "/login" });
     } else {
         selectedMenu.value = data;
         router.push({ path: data });
