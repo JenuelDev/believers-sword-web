@@ -1,3 +1,3 @@
 <template>
-    <div>This is the home page</div>
+    <div>welcome To Believers Sword</div>
 </template>
