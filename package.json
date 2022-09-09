@@ -12,6 +12,8 @@
     "nuxt-windicss": "^2.5.1"
   },
   "dependencies": {
-    "@nuxtjs/supabase": "^0.1.25"
+    "@nuxtjs/supabase": "^0.1.25",
+    "primeicons": "^5.0.0",
+    "primevue": "^3.17.0"
   }
 }

@@ -54,7 +54,7 @@ async function loginUser() {
                 />
             </div>
             <div>
-                <button class="border px-2 py-1" type="submit">Login</button>
+                <Button class="border px-2 py-1" type="submit" label="Login" :loading="loading" />
             </div>
         </form>
     </div>

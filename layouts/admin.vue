@@ -1,6 +1,7 @@
 <script setup lang="ts">
 const router = useRouter();
 const supabase = useSupabaseClient();
+const { $session } = useNuxtApp();
 const pageRoutes = [
     {
         label: "Home",
@@ -23,6 +24,7 @@ async function changePage(path: string) {
             alert(error.message);
             return;
         }
+        $session().remove("session");
         router.push("/login");
         return;
     }
