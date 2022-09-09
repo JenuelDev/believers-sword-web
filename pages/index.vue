@@ -1,5 +1,3 @@
 <template>
-    <div>
-        <h2>Welcome To Believers Sword!</h2>
-    </div>
+    <div>welcome To Believers Sword</div>
 </template>

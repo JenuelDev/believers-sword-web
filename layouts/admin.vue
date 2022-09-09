@@ -1,36 +1,53 @@
-<script setup>
-import { NLayout, NLayoutSider, NLayoutContent, NMessageProvider } from "naive-ui";
-
-const collapsed = ref(false);
+<script setup lang="ts">
 const router = useRouter();
+const supabase = useSupabaseClient();
 const { $session } = useNuxtApp();
+const pageRoutes = [
+    {
+        label: "Home",
+        path: "/admin/home",
+    },
+    {
+        label: "Sermons",
+        path: "/admin/sermons",
+    },
+    {
+        label: "Logout",
+        path: "logout",
+    },
+];
 
-onBeforeMount(async () => {
-    const session = $session.get("session");
-    if (!session) {
-        router.push({ path: "/login" });
+async function changePage(path: string) {
+    if (path === "logout" && confirm("Are you sure you want to logout")) {
+        const { error } = await supabase.auth.signOut();
+        if (error) {
+            alert(error.message);
+            return;
+        }
+        $session().remove("session");
+        router.push("/login");
+        return;
     }
-});
+    router.push({ path });
+}
 </script>
 <template>
-    <div>
-        <NMessageProvider>
-            <NLayout has-sider class="h-[100vh]">
-                <NLayoutSider
-                    collapse-mode="width"
-                    :collapsed-width="64"
-                    :width="240"
-                    show-trigger="bar"
-                    bordered
-                    @collapse="collapsed = true"
-                    @expand="collapsed = false"
+    <div class="h-full w-full">
+        <div class="p-3">Believers Sword Admin</div>
+        <div class="flex">
+            <div class="w-250px p-3 flex flex-col gap-2">
+                <div
+                    class="hover:font-600 cursor-pointer"
+                    v-for="pageRoute in pageRoutes"
+                    :key="pageRoute.path"
+                    @click="changePage(pageRoute.path)"
                 >
-                    <AdminMenus :collapsed="collapsed" />
-                </NLayoutSider>
-                <NLayoutContent content-style="padding: 24px;">
-                    <slot />
-                </NLayoutContent>
-            </NLayout>
-        </NMessageProvider>
+                    {{ pageRoute.label }}
+                </div>
+            </div>
+            <div class="w-full">
+                <slot />
+            </div>
+        </div>
     </div>
 </template>
