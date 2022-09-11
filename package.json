@@ -9,7 +9,9 @@
   },
   "devDependencies": {
     "nuxt": "3.0.0-rc.9",
-    "nuxt-windicss": "^2.5.1"
+    "nuxt-windicss": "^2.5.1",
+    "sass": "^1.54.9",
+    "sass-loader": "10"
   },
   "dependencies": {
     "@nuxtjs/supabase": "^0.1.25",

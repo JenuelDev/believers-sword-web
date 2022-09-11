@@ -26,36 +26,38 @@ async function loginUser() {
     }
 
     if (session) $session().set("session", session);
-    router.push({ path: "/admin/home" });
+    router.push("/admin/home");
     loading.value = false;
 }
 </script>
 <template>
-    <div>
-        <form @submit.prevent="loginUser" class="w-500px mt-4 mx-auto p-4 border shadow flex flex-col gap-5">
-            <div>
-                <label for="email-address">Email</label><br />
-                <input
-                    class="border-b w-full px-2 py-1"
-                    v-model="emailAddress"
-                    id="email-address"
-                    type="text"
-                    placeholder="Email Address"
-                />
-            </div>
-            <div>
-                <label for="password">Password</label><br />
-                <input
-                    class="border-b w-full px-2 py-1"
-                    v-model="password"
-                    id="password"
-                    type="password"
-                    placeholder="Password"
-                />
-            </div>
-            <div>
-                <Button class="border px-2 py-1" type="submit" label="Login" :loading="loading" />
-            </div>
-        </form>
-    </div>
+    <NuxtLayout>
+        <div>
+            <form @submit.prevent="loginUser" class="w-500px mt-4 mx-auto p-4 border shadow flex flex-col gap-5">
+                <div>
+                    <label for="email-address">Email</label><br />
+                    <input
+                        class="border-b w-full px-2 py-1"
+                        v-model="emailAddress"
+                        id="email-address"
+                        type="text"
+                        placeholder="Email Address"
+                    />
+                </div>
+                <div>
+                    <label for="password">Password</label><br />
+                    <input
+                        class="border-b w-full px-2 py-1"
+                        v-model="password"
+                        id="password"
+                        type="password"
+                        placeholder="Password"
+                    />
+                </div>
+                <div>
+                    <Button class="border px-2 py-1" type="submit" label="Login" :loading="loading" />
+                </div>
+            </form>
+        </div>
+    </NuxtLayout>
 </template>
