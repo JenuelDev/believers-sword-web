@@ -1,7 +1,11 @@
 <script setup lang="ts">
 const { $session } = useNuxtApp();
-onMounted(() => {
+onBeforeMount(() => {
     const theme = $session().get("theme");
+    if (!theme) {
+        document.body.className = "dark";
+        return;
+    }
     const newTheme = theme && theme == "dark" ? "dark" : "light";
     document.body.className = newTheme;
 });
@@ -9,7 +13,7 @@ onMounted(() => {
 <template>
     <div>
         <HomeNav />
-        <div class="pt-10">
+        <div class="pt-15 max-w-1200px px-20px mx-auto">
             <slot />
         </div>
     </div>

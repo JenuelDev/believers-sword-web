@@ -1,27 +1,62 @@
 <script setup lang="ts">
 useHead({
     title: "Believers Sword",
+    script: [
+        {
+            type: "text/javascript",
+            src: "https://platform-api.sharethis.com/js/sharethis.js#property=614ca36b13073f0019a43593&product=inline-share-buttons",
+            async: true,
+        },
+    ],
 });
+
+onMounted(() => {
+    setDownloadPath();
+});
+
+async function setDownloadPath() {
+    console.log("getting data");
+    await fetch("https://api.github.com/repos/Bible-Projects/believers-sword-app/releases/latest", {
+        method: "GET",
+        headers: {
+            Accept: "application/vnd.github.v3+json",
+        },
+    })
+        .then((response) => response.json())
+        .then((data) => {
+            const linkDownloadAppElement = document.getElementById("link-download-app");
+            linkDownloadAppElement.style.display = "block";
+            linkDownloadAppElement.setAttribute(
+                "href",
+                `https://github.com/Bible-Projects/believers-sword-app/releases/download/v${data.name}/Believers-Sword-Setup-${data.name}.exe`
+            );
+            document.getElementById("loading-button").style.display = "none";
+            document.getElementById("download-button").innerHTML = `Download For Windows v.${data.name}`;
+        })
+        .catch((e) => {
+            console.log(e);
+        });
+}
 </script>
 <template>
     <NuxtLayout>
         <section class="w-[100%] min-h-[100vh] dark:text-gray-100 py-[50px] duration-300">
-            <div class="px-[15px] mx-auto flex justify-center">
-                <img src="/assets/images/believers-sword.svg" width="180px" alt="Application Logo Image" />
+            <div class="flex justify-center">
+                <img src="~/assets/images/believers-sword.svg" width="180px" alt="Application Logo Image" />
             </div>
             <div
                 class="w-[100%] max-w-[1000px] mx-auto flex flex-col justify-center items-center px-[15px] text-center"
             >
-                <h1 class="md:text-[48px] text-[38px] font-thin">Believers Sword</h1>
-                <p class="text-center md:text-[18px] text-[16px] font-thin max-w-[700px]">
+                <h1 class="md:text-48px text-38px font-thin">Believers Sword</h1>
+                <p class="text-center md:text-18px text-16px font-thin max-w-700px !leading-normal mt-20px">
                     To God be the glory, We want to introduce this amazing bible studying app called "Believers Sword".
                     Whether you're new to this app or a seasoned user, Believers Sword App is a simple application that
                     helps you study bible with extra features.
                 </p>
-                <div class="my-[30px]">
+                <div class="my-30px">
                     <a
                         id="link-download-app"
-                        style="display: block"
+                        style="display: none"
                         href="https://github.com/Bible-Projects/believers-sword-app/releases/download/v1.2.6/Believers-Sword-Setup-1.2.6.exe"
                         class="my-[30px]"
                     >
@@ -29,13 +64,14 @@ useHead({
                             id="download-button"
                             class="bg-yellow-600 dark:bg-yellow-500 px-[15px] py-[5px] rounded-md hover:bg-yellow-700 duration-300 active:bg-yellow-900 text-gray-50"
                         >
-                            Download For Windows v.1.2.6</button
-                        ><br />
-                        <small class="font-bold dark:text-yellow-400 text-yellow-600"
-                            >Installer is <span>100%</span> Safe</small
-                        >
+                            Download For Windows v.1.2.6
+                        </button>
+                        <br />
+                        <small class="font-bold dark:text-yellow-400 text-yellow-600">
+                            Installer is <span>100%</span> Safe
+                        </small>
                     </a>
-                    <div id="loading-button" class="spin-icon" style="display: none">
+                    <div id="loading-button" class="spin-icon" style="display: block">
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
                             width="24"
