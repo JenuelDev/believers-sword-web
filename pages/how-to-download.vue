@@ -22,26 +22,18 @@ useHead({
                     <h1 class="text-[17px] font-bold">Step 1 - Download The Installer</h1>
                     <div class="pl-[20px]">
                         To Download the Installer, go to
-                        <NuxtLink class="text-blue-500 hover:underline font-medium" to="/"> Home Page </NuxtLink>
+                        <NuxtLink class="text-blue-500 hover:underline font-medium" to="/" target="_blank">
+                            Home Page
+                        </NuxtLink>
                         and download the Installer.
-                        <img
-                            class="border my-[10px] rounded-md"
-                            src="~/assets/images/howToDownload/step 1.png"
-                            alt=""
-                            srcset=""
-                        />
+                        <img class="border my-[10px] rounded-md" src="~/assets/images/how/step1.png" />
                     </div>
                 </div>
                 <div class="mt-[30px]">
                     <h1 class="text-[17px] font-bold">Step 2 - Save The Installer</h1>
                     <div class="pl-[20px]">
                         Save The File by clicking save button.
-                        <img
-                            class="border my-[10px] rounded-md"
-                            src="~/assets/images/howToDownload/step 2.png"
-                            alt=""
-                            srcset=""
-                        />
+                        <img class="border my-[10px] rounded-md" src="~/assets/images/how/step2.png" />
                     </div>
                 </div>
                 <div class="mt-[30px]">
@@ -61,24 +53,14 @@ useHead({
                             to help me get a Code Sign for this application.
                         </div>
 
-                        <img
-                            class="border my-[10px] rounded-md"
-                            src="~/assets/images/howToDownload/step 3.png"
-                            alt=""
-                            srcset=""
-                        />
+                        <img class="border my-[10px] rounded-md" src="~/assets/images/how/step3.png" />
                     </div>
                 </div>
                 <div class="mt-[30px]">
                     <h1 class="text-[17px] font-bold">Step 4 - Open The Installer</h1>
                     <div class="pl-[20px]">
                         Open the installer by clicking the installer.
-                        <img
-                            class="border my-[10px] rounded-md"
-                            src="~/assets/images/howToDownload/step 4.png"
-                            alt=""
-                            srcset=""
-                        />
+                        <img class="border my-[10px] rounded-md" src="~/assets/images/how/step4.png" />
                     </div>
                 </div>
                 <div class="mt-[30px]">
@@ -92,53 +74,33 @@ useHead({
                             <h1 class="font-bold underline">This Installer is Totally Safe</h1>
                             Code sign is a certificate for the app. Code Signing is very expensive, and This application
                             is Free. You can
-                            <a class="text-blue-500 hover:underline font-medium" target="_blank" href="/donate"
-                                >Donate</a
-                            >
+                            <NuxtLink class="text-blue-500 hover:underline font-medium" target="_blank" to="/donate">
+                                Donate
+                            </NuxtLink>
                             to help me get a Code Sign for this application.
                         </div>
-                        <img
-                            class="border my-[10px] rounded-md"
-                            src="~/assets/images/howToDownload/step 5.png"
-                            alt=""
-                            srcset=""
-                        />
+                        <img class="border my-[10px] rounded-md" src="~/assets/images/how/step5.png" />
                     </div>
                 </div>
                 <div class="mt-[30px]">
                     <h1 class="text-[17px] font-bold">Step 6 - Run The Installer"</h1>
                     <div class="pl-[20px]">
                         Run the installer
-                        <img
-                            class="border my-[10px] rounded-md"
-                            src="~/assets/images/howToDownload/step 6.png"
-                            alt=""
-                            srcset=""
-                        />
+                        <img class="border my-[10px] rounded-md" src="~/assets/images/how/step6.png" />
                     </div>
                 </div>
                 <div class="mt-[30px]">
                     <h1 class="text-[17px] font-bold">Step 7 - Click Next"</h1>
                     <div class="pl-[20px]">
                         It is recommended to choose Only for me Option
-                        <img
-                            class="border my-[10px] rounded-md"
-                            src="~/assets/images/howToDownload/step 7.png"
-                            alt=""
-                            srcset=""
-                        />
+                        <img class="border my-[10px] rounded-md" src="~/assets/images/how/step7.png" />
                     </div>
                 </div>
                 <div class="mt-[30px]">
                     <h1 class="text-[17px] font-bold">Step 8 - Click Install"</h1>
                     <div class="pl-[20px]">
                         Click Install, to install the app on your computer.
-                        <img
-                            class="border my-[10px] rounded-md"
-                            src="~/assets/images/howToDownload/step 8.png"
-                            alt=""
-                            srcset=""
-                        />
+                        <img class="border my-[10px] rounded-md" src="~/assets/images/how/step8.png" />
                     </div>
                 </div>
                 <div class="mt-[30px]">
@@ -146,12 +108,7 @@ useHead({
                     <div class="pl-[20px]">
                         Once, the installer is done click finish. Then the app will automatically be opened after
                         clicking the finish button.
-                        <img
-                            class="border my-[10px] rounded-md"
-                            src="~/assets/images/howToDownload/step 9.png"
-                            alt=""
-                            srcset=""
-                        />
+                        <img class="border my-[10px] rounded-md" src="~/assets/images/how/step9.png" />
                     </div>
                 </div>
             </div>
