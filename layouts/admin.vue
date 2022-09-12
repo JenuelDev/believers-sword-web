@@ -30,9 +30,13 @@ async function changePage(path: string) {
     }
     router.push({ path });
 }
+
+onBeforeMount(() => {
+    document.body.className = "light";
+});
 </script>
 <template>
-    <div class="h-full w-full">
+    <div class="h-full w-full px-20px">
         <div class="p-3">Believers Sword Admin</div>
         <div class="flex">
             <div class="w-250px p-3 flex flex-col gap-2">
@@ -45,7 +49,7 @@ async function changePage(path: string) {
                     {{ pageRoute.label }}
                 </div>
             </div>
-            <div class="w-full">
+            <div class="w-full p-3 bg-light-50 border rounded-md">
                 <slot />
             </div>
         </div>
