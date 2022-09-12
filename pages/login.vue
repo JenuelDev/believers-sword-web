@@ -32,7 +32,7 @@ async function loginUser() {
 </script>
 <template>
     <NuxtLayout>
-        <div>
+        <div class="min-h-[100vh]">
             <form @submit.prevent="loginUser" class="w-500px mt-4 mx-auto p-4 border shadow flex flex-col gap-5">
                 <div>
                     <label for="email-address">Email</label><br />
