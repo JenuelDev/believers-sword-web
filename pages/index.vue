@@ -25,13 +25,17 @@ async function setDownloadPath() {
         .then((response) => response.json())
         .then((data) => {
             const linkDownloadAppElement = document.getElementById("link-download-app");
-            linkDownloadAppElement.style.display = "block";
-            linkDownloadAppElement.setAttribute(
-                "href",
-                `https://github.com/Bible-Projects/believers-sword-app/releases/download/v${data.name}/Believers-Sword-Setup-${data.name}.exe`
-            );
-            document.getElementById("loading-button").style.display = "none";
-            document.getElementById("download-button").innerHTML = `Download For Windows v.${data.name}`;
+            if (linkDownloadAppElement) linkDownloadAppElement.style.display = "block";
+            if (linkDownloadAppElement)
+                linkDownloadAppElement.setAttribute(
+                    "href",
+                    `https://github.com/Bible-Projects/believers-sword-app/releases/download/v${data.name}/Believers-Sword-Setup-${data.name}.exe`
+                );
+
+            const loadingButton = document.getElementById("loading-button");
+            const downloadButton = document.getElementById("download-button");
+            if (loadingButton) loadingButton.style.display = "none";
+            if (downloadButton) downloadButton.innerHTML = `Download For Windows v.${data.name}`;
         })
         .catch((e) => {
             console.log(e);

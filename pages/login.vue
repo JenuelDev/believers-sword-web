@@ -8,7 +8,7 @@ const router = useRouter();
 
 onBeforeMount(() => {
     if ($session().get("session")) {
-        router.push({ path: "/admin/home" });
+        router.push({ path: "/admin" });
     }
 });
 
@@ -18,7 +18,7 @@ async function loginUser() {
         password: password.value,
     };
     loading.value = true;
-    const { user, session, error } = await supabase.auth.signIn(data);
+    const { user, session, error } = await supabase.auth.signIn(data as any);
     if (error) {
         alert("Their is an Error");
         loading.value = false;
@@ -26,7 +26,7 @@ async function loginUser() {
     }
 
     if (session) $session().set("session", session);
-    router.push("/admin/home");
+    router.push("/admin");
     loading.value = false;
 }
 </script>
@@ -55,7 +55,7 @@ async function loginUser() {
                     />
                 </div>
                 <div>
-                    <Button class="border px-2 py-1" type="submit" label="Login" :loading="loading" />
+                    <PButton class="border px-2 py-1" type="submit" label="Login" :loading="loading" />
                 </div>
             </form>
         </div>

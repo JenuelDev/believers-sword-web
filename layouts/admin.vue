@@ -5,7 +5,7 @@ const { $session } = useNuxtApp();
 const pageRoutes = [
     {
         label: "Home",
-        path: "/admin/home",
+        path: "/admin",
     },
     {
         label: "Sermons",

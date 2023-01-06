@@ -14,8 +14,9 @@ const scripture = ref(null);
 const createdAt = ref(null);
 const author = ref(null);
 const denomination = ref(null);
-const description = ref(null);
-const content = ref(null);
+const description = ref<string>("");
+const content = ref("");
+const loading = ref(false);
 
 const denominationOptions = [
     { label: "Adventist" },
@@ -59,7 +60,7 @@ const denominationOptions = [
 ];
 
 const getYoutubeVideoDetails = async (
-    youtubeVideoId,
+    youtubeVideoId: string | number,
     key = "AIzaSyB6XTl8aX3Ro3lVKtPbx_2pHyTVU4GAyQM",
     part = "snippet,contentDetails,statistics,status"
 ) => {
@@ -73,10 +74,10 @@ const getYoutubeVideoDetails = async (
 };
 
 async function submitSermon() {
+    loading.value = true;
     if (selectedType.value == "youtube") {
         // get data from api
-        const youtubeData: any = await getYoutubeVideoDetails(youtubeId.value);
-        console.log(youtubeData);
+        const youtubeData: any = await getYoutubeVideoDetails(youtubeId.value as any);
 
         if (!youtubeData || !youtubeData.items) {
             alert("Fetching Video Details Error");
@@ -131,6 +132,8 @@ async function submitSermon() {
         alert("Data Successfully Added!");
         useRouter().push({ path: "/admin/sermons" });
     }
+
+    loading.value = false;
 }
 </script>
 
@@ -235,7 +238,9 @@ async function submitSermon() {
                     <Editor v-model="content" editorStyle="height: 320px" />
                 </div>
                 <div>
-                    <button @click="submitSermon()" class="hover:underline">Create</button>
+                    <PButton @click="submitSermon()" class="hover:underline" :loading="loading" :disabled="loading">
+                        Create
+                    </PButton>
                 </div>
             </div>
         </div>

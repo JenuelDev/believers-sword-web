@@ -1,17 +1,17 @@
 const STORAGE = localStorage;
 const VueSession = {
     key: "believers-bible-session",
-    setAll: function (all) {
+    setAll: function (all: any) {
         STORAGE.setItem(VueSession.key, JSON.stringify(all));
     },
 };
 
 const sessionFunctions = {
     getAll: function () {
-        const all = JSON.parse(STORAGE.getItem(VueSession.key));
+        const all = JSON.parse(STORAGE.getItem(VueSession.key) as any);
         return all || {};
     },
-    set: function (key, value) {
+    set: function (key: string, value: any) {
         if (key == "session-id") return false;
         let all = this.getAll();
 
@@ -24,7 +24,7 @@ const sessionFunctions = {
 
         VueSession.setAll(all);
     },
-    get: function (key) {
+    get: function (key: string) {
         const all = this.getAll();
         return all[key];
     },
@@ -34,7 +34,7 @@ const sessionFunctions = {
 
         VueSession.setAll(all);
     },
-    renew: function (sessionId) {
+    renew: function (sessionId: string | number) {
         const all = this.getAll();
         all["session-id"] = "sess:" + sessionId;
         VueSession.setAll(all);
@@ -43,11 +43,11 @@ const sessionFunctions = {
         const all = this.getAll();
         return "session-id" in all;
     },
-    has: function (key) {
+    has: function (key: string) {
         const all = this.getAll();
         return key in all;
     },
-    remove: function (key) {
+    remove: function (key: string) {
         const all = this.getAll();
         delete all[key];
 
