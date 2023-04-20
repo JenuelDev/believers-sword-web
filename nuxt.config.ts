@@ -5,5 +5,6 @@ export default defineNuxtConfig({
         "primevue/resources/primevue.css",
         "primeicons/primeicons.css",
         "~/assets/style/main.scss",
+        "vue3-carousel/dist/carousel.css",
     ],
 });

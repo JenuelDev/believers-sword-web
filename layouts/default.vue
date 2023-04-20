@@ -16,5 +16,6 @@ onBeforeMount(() => {
         <div class="pt-15 max-w-1200px px-20px mx-auto">
             <slot />
         </div>
+        <Footer />
     </div>
 </template>
