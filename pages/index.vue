@@ -125,6 +125,7 @@ async function setDownloadPath() {
                     </a>
                 </div>
             </div>
+            <Sponsors />
         </section>
     </NuxtLayout>
 </template>
