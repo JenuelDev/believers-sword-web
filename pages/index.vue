@@ -1,21 +1,11 @@
 <script lang="ts" setup>
-useHead({
-    title: "Believers Sword",
-    script: [
-        {
-            type: "text/javascript",
-            src: "https://platform-api.sharethis.com/js/sharethis.js#property=614ca36b13073f0019a43593&product=inline-share-buttons",
-            async: true,
-        },
-    ],
-});
+const downloadLink = ref<string | null>(null);
 
 onMounted(() => {
     setDownloadPath();
 });
 
 async function setDownloadPath() {
-    console.log("getting data");
     await fetch("https://api.github.com/repos/Bible-Projects/believers-sword-next/releases/latest", {
         method: "GET",
         headers: {
@@ -24,18 +14,8 @@ async function setDownloadPath() {
     })
         .then((response) => response.json())
         .then((data) => {
-            const linkDownloadAppElement = document.getElementById("link-download-app");
-            if (linkDownloadAppElement) linkDownloadAppElement.style.display = "block";
-            if (linkDownloadAppElement)
-                linkDownloadAppElement.setAttribute(
-                    "href",
-                    `https://github.com/Bible-Projects/believers-sword-app/releases/download/v${data.name}/Believers-Sword-Setup-${data.name}.exe`
-                );
-
-            const loadingButton = document.getElementById("loading-button");
-            const downloadButton = document.getElementById("download-button");
-            if (loadingButton) loadingButton.style.display = "none";
-            if (downloadButton) downloadButton.innerHTML = `Download For Windows v.${data.name}`;
+            console.log(data);
+            downloadLink.value = `https://github.com/Bible-Projects/believers-sword-next/releases/download/v${data.name}/Believers-Sword-Setup-${data.name}.exe`;
         })
         .catch((e) => {
             console.log(e);
@@ -63,25 +43,16 @@ async function setDownloadPath() {
                     helps you study bible with extra features.
                 </p>
                 <div class="my-30px flex flex-col gap-10px items-center justify-center">
-                    <a
-                        id="link-download-app"
-                        class="my-[30px]"
-                        href="https://github.com/Bible-Projects/believers-sword-app/releases/download/v1.2.6/Believers-Sword-Setup-1.2.6.exe"
-                        style="display: none"
-                    >
+                    <a v-if="downloadLink" class="my-[30px]" :href="downloadLink">
                         <button
                             id="download-button"
                             class="bg-yellow-600 dark:bg-yellow-500 px-[15px] py-[5px] rounded-md hover:bg-yellow-700 duration-300 active:bg-yellow-900 text-dark-900 inline-flex text-white border-0 py-2 px-6 focus:outline-none rounded text-lg"
                         >
-                            Download For Windows v.1.2.6
+                            Download For Windows
                         </button>
-                        <br />
-                        <small class="font-bold dark:text-yellow-400 text-yellow-600">
-                            Installer is <span>100%</span> Safe
-                        </small>
                     </a>
 
-                    <div id="loading-button" class="spin-icon" style="display: block">
+                    <div v-else class="spin-icon">
                         <svg
                             height="24"
                             style="fill: rgba(255, 255, 255, 1)"
